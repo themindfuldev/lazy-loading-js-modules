@@ -10,7 +10,7 @@ You should just edit the source file at src/README.md - the one which stars with
 
 <img src="img/sloth-zootopia.gif" class="logo"></p>
 
-@@author @ [Mobile+Web DevCon](http://mobilewebdevconference.com/san-francisco-2017/) 
+@@author @ [ForwardJS](http://forwardjs.com) 
 <br/>@@date
 
 ---
@@ -30,7 +30,7 @@ You should just edit the source file at src/README.md - the one which stars with
   <li>*[@@email](mailto:@@email)*</li>
 </ul>
 
-----
+<!-- ----
 
 ## Avenue Code
 
@@ -44,7 +44,7 @@ You should just edit the source file at src/README.md - the one which stars with
   <li>Partners with MuleSoft, Adobe, Chef, Oracle and AWS</li>
   <li>Project Management, Business Analysis, Development, QA, DevOps, Coaching</li>
   <li>*[www.avenuecode.com/careers](https://www.avenuecode.com/careers)*</li>
-</ul>
+</ul> -->
 
 ---
 
@@ -179,7 +179,6 @@ You should just edit the source file at src/README.md - the one which stars with
 
 - *Part II: Blazing loading*
   - Modules
-  - Lazy-loading in AMD
   - Lazy-loading in CommonJS
   - Lazy-loading in ES2015
   - Webpack 2
@@ -189,7 +188,7 @@ You should just edit the source file at src/README.md - the one which stars with
 ## Module
 
 - *Structural* design pattern
-- Purpose: to define reusable components with private/public attributes and methods
+- Purpose: to define reusable components with private/public variables and functions
 - Pre-condition: a chunk of code with a return point
 - Post-condition: a definition that represents that chunk of code as a module
 
@@ -200,7 +199,7 @@ You should just edit the source file at src/README.md - the one which stars with
 - Encapsulation through *closures* -> function scope
 
 ```javascript
-  var Zoo = (function() {
+  var Kennel = (function() {
     var getBarkStyle = function(isHowler) {
       return isHowler? 'woooooow!': 'woof, woof!';
     };
@@ -218,7 +217,7 @@ You should just edit the source file at src/README.md - the one which stars with
 ```
 
 ```javascript
-var myDog = new Zoo.Dog('Sherlock', 'beagle');
+var myDog = new Kennel.Dog('Sherlock', 'beagle');
 console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
 ```
 
@@ -228,7 +227,7 @@ console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
 
 - Flexibility to switch items from private to public scope.
 ```javascript
-  let Zoo = (function() {
+  let Kennel = (function() {
     let getBarkStyle = isHowler => isHowler ? 'woooooow!' : 'woof, woof!';
     let Dog = function(name, breed) {
       this.name = name;
@@ -259,7 +258,7 @@ console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
 
 ## Module loaders
 
-- On the previous example, *Zoo* is a global var, which is:
+- On the previous example, *Kennel* is a global var:
   - fragile (any posterior code can modify/redefine it)
   - not scalable (what if you define 100 modules?)
   - counter-productive (you have to manually resolve your dependencies)
@@ -270,82 +269,6 @@ console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
 - Included with your Module standard of choice!
 
 ---
-
-## AMD
-
-- A standard for *asynchronous* modules.
-- Pros:
-  - Multiple modules can be loaded in parallel.
-  - It naturally works on the browser.
-  - Easy to lazy-load modules.
-- Cons:
-  - Complex, easy to create race conditions.
-  - Not guaranteed order of execution of modules.
-  - Dependencies array gets hard to read easily.
-
-----
-
-## Lazy-loading in AMD
-
-- Export your module interface with *define()*
-- Import on the client using *require()*
-```javascript
-  // dog.js
-  define('dog', [], function() {
-    var Dog = function(name, breed) {
-      this.name = name;
-      this.breed = breed;
-    };
-    Dog.prototype.bark = function() {
-      return this.name + ': ' + getBarkStyle(this.breed);
-    };
-    function getBarkStyle(breed) {
-      return breed === 'husky'? 'woooooow!': 'woof, woof!';
-    };
-    return Dog;
-  });
-```
-
-----
-
-## Lazy-loading in AMD
-
-- Lazy-loading upon user interaction:
-
-```javascript
-// main.js
-define('main', [], function() {
-  document.getElementById('loadDogButton')
-          .addEventListener('click', function(e) {
-    // Lazy-loading dog module
-    require(['dog'], function(Dog) {
-      var dogContainer = document.getElementById('dogContainer');
-
-      var sherlock = new Dog('Sherlock', 'beagle');
-      dogContainer.innerHTML += sherlock.bark();
-
-      var whisky = new Dog('Whisky', 'husky');
-      dogContainer.innerHTML += '<br/>' + whisky.bark();
-    });
-  });
-});
-```
-
----
-
-## CommonJS
-
-- A standard for *synchronous* modules.
-- Pros:
-  - Official Node.js and NPM format.
-  - Simple and convenient syntax.
-  - Guaranteed order of execution of modules.
-- Cons:
-  - Doesn't naturally work on the browser (there are solutions for that as *Browserify* and *Webpack*).
-  - Sequential loading of modules is slower than asynchronous.
-  - NPM dependency tree can skyrocket easily.
-
-----
 
 ## Lazy-loading in CommonJS
 
@@ -394,13 +317,13 @@ document.getElementById('loadDogButton')
 
 ---
 
-## ES2015 Modules
+## ES Modules
 
-- ES2015 offers native Modules which are quite a bit similar to CommonJS.
+- ES2015+ offers native Modules which are quite a bit similar to CommonJS.
 
 ```javascript
 // dog.js
-let getBarkStyle = function(breed) {
+let getBarkStyle = breed => {
   return breed === 'husky'? 'woooooow!': 'woof, woof!';
 };
 
@@ -418,18 +341,20 @@ export class Dog {
 
 ----
 
-## ES2015 Module Loader
+## Using ES Modules
 
-- ES2015 Modules are not yet natively supported by all browsers & Node.js.
-- You can use them right now with a transpiler as [Babel.js](https://babeljs.io/).
-- Consider a module loader such as [System.js](https://github.com/systemjs/systemjs), which supports AMD, CommonJS, ES2015 and global.
-- The Module Loader spec is in the works by WhatWG: [Loader](https://whatwg.github.io/loader/).
+- ES Modules are shipping on evergreen browsers: Chrome 61, Edge 15, Firefox 54, Safari 10.1
+- Yet for compatibility reasons you probably should still use a transpiler as [Babel.js](https://babeljs.io/).
+- You can adopt a module loader such as [System.js](https://github.com/systemjs/systemjs).
+- More on:
+  - [ES6 Modules in Chrome Canary (M60+)](https://medium.com/dev-channel/es6-modules-in-chrome-canary-m60-ba588dfb8ab7)
+  - [Native ES Modules — Ready for Prime Time?](https://hackernoon.com/native-es-modules-ready-for-prime-time-87c64d294d3c)
 
 ----
 
 ## System.js
 
-- [System.js](https://github.com/systemjs/systemjs) is a module loader which supports AMD, CommonJS, ES2015 and global scripts.
+- [System.js](https://github.com/systemjs/systemjs) is a module loader which supports AMD, CommonJS, ES and global scripts.
 - Is performs asynchronous module loading using a Promises-based API.
 - Promises can be chained and combined.
 - *`Promises.all `* can load multiple modules in parallel.
@@ -465,8 +390,8 @@ document.getElementById('loadDogButton')
 ## Webpack 2
 
 - Webpack is a module bundler constituted of [Entries, Outputs, Loaders and Plugins](https://webpack.js.org/concepts/).
-- [Webpack 2](https://webpack.js.org/) (just released) now offers native *ES2015 modules* and *System.js* support.
-- Loads JS modules in AMD, CommonJS and ES2015 (and also TypeScript and CoffeeScript).
+- [Webpack 2](https://webpack.js.org/) offers native *ES modules* and *System.js* support.
+- Loads JS modules in AMD, CommonJS and ES modules (and also TypeScript and CoffeeScript).
 - Performs bundling (importing the dependency graph in the right order).
 - Lazy-loads JS and CSS (code splitting).
 - Performs tree-shaking.
@@ -498,8 +423,8 @@ document.getElementById('loadDogButton')
 
 # Thanks!
 
-- Special thanks to Avenue Code, Mobile+Web DevCon crew and most importantly all the attendees!
-- Slides: [tiagorg.com/lab-lazy-loading-es2015-modules](http://tiagorg.com/lab-lazy-loading-es2015-modules)
-- Github: [github.com/tiagorg/lab-lazy-loading-es2015-modules](https://github.com/tiagorg/lab-lazy-loading-es2015-modules)
+- Special thanks to ForwardJS crew and most importantly all the attendees!
+- Slides: [tiagorg.com/lazy-loading-js-modules/#/](http://tiagorg.com/lazy-loading-js-modules)
+- Github: [github.com/tiagorg/lazy-loading-js-modules](https://github.com/tiagorg/lazy-loading-js-modules)
 - More talks at [tiagorg.com](http://tiagorg.com)
 - Follow me at [@tiagooo_romero](https://twitter.com/tiagooo_romero)

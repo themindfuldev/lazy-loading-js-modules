@@ -1,8 +1,8 @@
 {
-  "description": "Learn about loading code during page load time vs lazy loading, then how to load AMD, CJS and ES2015 modules both synchronously (during page load) and asynchronously (lazy-load) using Webpack 2.",
+  "description": "Learn about loading code during page load time vs lazy loading, then how to load CJS and ES2015 modules both synchronously (during page load) and asynchronously (lazy-load) using Webpack 2.",
   "title": "Lazy loading JS modules in the browser",
   "author": "Tiago Garcia",
   "email": "tgarcia@avenuecode.com",
   "porfolio": "http://tiagorg.com",
-  "date": "Mar 1st, 2017"
+  "date": "Jul 27th, 2017"
 }
