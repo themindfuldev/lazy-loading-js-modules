@@ -424,7 +424,7 @@ document.getElementById('loadDogButton')
 # Thanks!
 
 - Special thanks to ForwardJS crew and most importantly all the attendees!
-- Slides: [tiagorg.com/lazy-loading-js-modules/#/](http://tiagorg.com/lazy-loading-js-modules)
+- Slides: [tiagorg.com/lazy-loading-js-modules](http://tiagorg.com/lazy-loading-js-modules)
 - Github: [github.com/tiagorg/lazy-loading-js-modules](https://github.com/tiagorg/lazy-loading-js-modules)
 - More talks at [tiagorg.com](http://tiagorg.com)
 - Follow me at [@tiagooo_romero](https://twitter.com/tiagooo_romero)
