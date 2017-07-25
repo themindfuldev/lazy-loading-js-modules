@@ -355,7 +355,7 @@ export class Dog {
 ## System.js
 
 - [System.js](https://github.com/systemjs/systemjs) is a module loader which supports AMD, CommonJS, ES and global scripts.
-- Is performs asynchronous module loading using a Promises-based API.
+- It performs asynchronous module loading using a Promises-based API.
 - Promises can be chained and combined.
 - *`Promises.all `* can load multiple modules in parallel.
 - System.js 0.2.0 ships with [dynamic import() operator](https://github.com/tc39/proposal-dynamic-import).
