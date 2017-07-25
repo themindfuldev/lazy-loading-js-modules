@@ -180,7 +180,7 @@ You should just edit the source file at src/README.md - the one which stars with
 - *Part II: Blazing loading*
   - Modules
   - Lazy-loading in CommonJS
-  - Lazy-loading in ES2015
+  - Lazy-loading in ES Modules
   - Webpack 2
 
 ---
@@ -270,7 +270,7 @@ console.log(myDog.name + ': ' + myDog.bark); // Sherlock: woof, woof!
 
 ---
 
-## Lazy-loading in CommonJS
+## CommonJS
 
 - Export your module interface with *module.exports*
 - Import on the client using *require(dependency)*
@@ -362,7 +362,7 @@ export class Dog {
 
 ----
 
-## Lazy-loading in System.js
+## Lazy-loading ES Modules
 
 - Using the [dynamic import() operator](http://www.2ality.com/2017/01/import-operator.html)
 
