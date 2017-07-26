@@ -30,7 +30,7 @@ You should just edit the source file at src/README.md - the one which stars with
   <li>*[@@email](mailto:@@email)*</li>
 </ul>
 
-<!-- ----
+----
 
 ## Avenue Code
 
@@ -39,12 +39,12 @@ You should just edit the source file at src/README.md - the one which stars with
 </p>
 
 <ul class="ac-column-text">
-  <li>Offices in San Francisco, São Paulo, Belo Horizonte</li>
+  <li>Offices in SF & NY (US), São Paulo & Belo Horizonte (BR)</li>
   <li>Primary verticals: <br/>Retail & Financial services</li>
   <li>Partners with MuleSoft, Adobe, Chef, Oracle and AWS</li>
   <li>Project Management, Business Analysis, Development, QA, DevOps, Coaching</li>
-  <li>*[www.avenuecode.com/careers](https://www.avenuecode.com/careers)*</li>
-</ul> -->
+  <li>*[avenuecode.com/careers](https://www.avenuecode.com/careers)*</li>
+</ul> 
 
 ---
 
